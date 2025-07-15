@@ -57,28 +57,7 @@ public class URLController {
         }
         return ResponseEntity.ok(response);
     }
-    @GetMapping("/debug/my-urls")
-    public ResponseEntity<?> debugMyUrls(HttpServletRequest request) {
-        String email = request.getUserPrincipal() != null ? request.getUserPrincipal().getName() : null;
-        if (email == null) {
-            return ResponseEntity.status(401).body("Not authenticated");
-        }
-        User user = userService.findByEmail(email);
-        if (user == null) {
-            return ResponseEntity.status(403).body("User not found");
-        }
-        java.util.List<ShortURL> urls = urlService.getUrlsByUser(user);
-        java.util.List<java.util.Map<String, Object>> response = new java.util.ArrayList<>();
-        for (ShortURL url : urls) {
-            java.util.Map<String, Object> map = new java.util.HashMap<>();
-            map.put("urlId", url.getId());
-            map.put("shortCode", url.getShortCode());
-            map.put("originalUrl", url.getOriginalUrl());
-            map.put("userId", url.getUser() != null ? url.getUser().getId() : null);
-            response.add(map);
-        }
-        return ResponseEntity.ok(response);
-    }
+
     @GetMapping("/{id}")
     public ResponseEntity<?> getUrlById(@PathVariable Long id, HttpServletRequest request) {
         String email = request.getUserPrincipal().getName();
@@ -126,6 +105,4 @@ public class URLController {
         return ResponseEntity.ok(response);
     }
 
-    // Debug endpoint: List all URLs for the current user with userId and urlId
-// ...existing code...
 }
