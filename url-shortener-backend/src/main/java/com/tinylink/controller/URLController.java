@@ -18,13 +18,24 @@ import jakarta.servlet.http.HttpServletRequest;
 public class URLController {
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteUrl(@PathVariable Long id, HttpServletRequest request) {
-        String email = request.getUserPrincipal().getName();
+        String email = request.getUserPrincipal() != null ? request.getUserPrincipal().getName() : null;
+        System.out.println("[DELETE URL] Requested by: " + email + ", URL id: " + id);
+        if (email == null) {
+            System.out.println("[DELETE URL] No user principal found (not authenticated)");
+            return ResponseEntity.status(401).body("Not authenticated");
+        }
         User user = userService.findByEmail(email);
+        if (user == null) {
+            System.out.println("[DELETE URL] User not found for email: " + email);
+            return ResponseEntity.status(403).body("User not found");
+        }
         boolean deleted = urlService.deleteByIdAndUser(id, user);
         if (deleted) {
+            System.out.println("[DELETE URL] Deleted successfully");
             return ResponseEntity.ok().body("Deleted");
         } else {
-            return ResponseEntity.status(403).body("Not authorized or not found");
+            System.out.println("[DELETE URL] Not authorized or URL not found for user: " + email);
+            return ResponseEntity.status(403).body("Not authorized or URL not found for this user");
         }
     }
     @GetMapping("/my-urls")
