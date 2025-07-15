@@ -155,12 +155,13 @@ const Dashboard: React.FC = () => {
     });
   };
 
+  const [deletingId, setDeletingId] = useState<string | null>(null);
   const deleteUrl = async (id: string) => {
+    setDeletingId(id);
     try {
       await apiCall(`/api/url/${Number(id)}`, {
         method: 'DELETE',
       });
-      
       setUrls(prev => prev.filter(url => url.id !== id));
       toast({
         title: "Deleted",
@@ -172,6 +173,8 @@ const Dashboard: React.FC = () => {
         description: "Failed to delete URL. Please try again.",
         variant: "destructive",
       });
+    } finally {
+      setDeletingId(null);
     }
   };
 
@@ -308,8 +311,16 @@ const Dashboard: React.FC = () => {
                         <button
                           onClick={() => deleteUrl(urlItem.id)}
                           className="p-2 glass glass-hover rounded-lg text-red-400 hover:text-red-300"
+                          disabled={deletingId === urlItem.id}
                         >
-                          <Trash2 className="w-4 h-4" />
+                          {deletingId === urlItem.id ? (
+                            <svg className="animate-spin h-4 w-4 text-red-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>
+                            </svg>
+                          ) : (
+                            <Trash2 className="w-4 h-4" />
+                          )}
                         </button>
                       </div>
                     </td>
