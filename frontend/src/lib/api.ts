@@ -1,4 +1,4 @@
-const API_BASE_URL = "https://url-shortener-backend-3pnk.onrender.com";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 console.log("Frontend is using:", API_BASE_URL); // <--- Log it
 export async function apiCall(path: string, options: RequestInit = {}) {
   // Get token from localStorage if available
