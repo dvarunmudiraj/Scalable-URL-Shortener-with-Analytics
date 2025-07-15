@@ -1,4 +1,4 @@
-export const API_BASE_URL = "http://localhost:8081/api"; // Update port if needed
+const API_BASE_URL = "https://url-shortener-backend-3pnk.onrender.com";
 console.log("Frontend is using:", API_BASE_URL); // <--- Log it
 export async function apiCall(path: string, options: RequestInit = {}) {
   // Get token from localStorage if available
