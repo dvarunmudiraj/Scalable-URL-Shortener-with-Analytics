@@ -23,7 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 @RestController
 @RequestMapping("/api/auth")
-@CrossOrigin(origins = "http://localhost:8082", allowCredentials = "true")
+
 public class AuthController {
 
  @Autowired
