@@ -30,7 +30,7 @@ const Dashboard: React.FC = () => {
   useEffect(() => {
     const fetchUrls = async () => {
       try {
-        const response = await apiCall('/url/my-urls');
+        const response = await apiCall('/api/url/my-urls');
         console.log('Fetched URLs:', response);
         if (Array.isArray(response) && response.length > 0) {
           console.log('First URL item:', response[0]);
@@ -96,14 +96,14 @@ const Dashboard: React.FC = () => {
         payload.customCode = customCode;
       }
 
-      const response = await apiCall('/url/shorten', {
+      const response = await apiCall('/api/url/shorten', {
         method: 'POST',
         body: JSON.stringify(payload),
       });
       console.log('Shorten response:', response);
       // After shortening, re-fetch URLs from backend to ensure sync
       try {
-        const urlsResponse = await apiCall('/url/my-urls');
+        const urlsResponse = await apiCall('/api/url/my-urls');
         let urlsArr = Array.isArray(urlsResponse) ? urlsResponse : (urlsResponse.urls || []);
         urlsArr = urlsArr.map((item: any) => {
           const id = item.id || item._id || item.shortCode || item.short_code;
@@ -157,7 +157,7 @@ const Dashboard: React.FC = () => {
 
   const deleteUrl = async (id: string) => {
     try {
-      await apiCall(`/url/${id}`, {
+      await apiCall(`/api/url/${id}`, {
         method: 'DELETE',
       });
       

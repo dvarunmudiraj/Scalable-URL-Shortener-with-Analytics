@@ -21,7 +21,7 @@ const Analytics: React.FC = () => {
       
       setIsLoading(true);
       try {
-        const response = await apiCall(`/analytics/${shortCode}?timeRange=${timeRange}`);
+        const response = await apiCall(`/api/analytics/${shortCode}?timeRange=${timeRange}`);
         setAnalyticsData(response);
       } catch (error) {
         console.error('Failed to fetch analytics:', error);

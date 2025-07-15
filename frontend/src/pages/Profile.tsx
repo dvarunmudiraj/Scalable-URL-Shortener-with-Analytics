@@ -23,7 +23,7 @@ const Profile: React.FC = () => {
   useEffect(() => {
     const fetchProfileStats = async () => {
       try {
-        const response = await apiCall('/user/profile');
+        const response = await apiCall('/api/user/profile');
         setProfileStats(response);
       } catch (error) {
         console.error('Failed to fetch profile stats:', error);
@@ -47,7 +47,7 @@ const Profile: React.FC = () => {
 
     setIsLoading(true);
     try {
-      await apiCall('/user/profile', {
+      await apiCall('/api/user/profile', {
         method: 'PUT',
         body: JSON.stringify({ username }),
       });
@@ -100,7 +100,7 @@ const Profile: React.FC = () => {
 
     setIsLoading(true);
     try {
-      await apiCall('/user/change-password', {
+      await apiCall('/api/user/change-password', {
         method: 'POST',
         body: JSON.stringify({ 
           currentPassword, 

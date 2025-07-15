@@ -23,7 +23,7 @@ const AdminPanel: React.FC = () => {
   useEffect(() => {
     const fetchPendingUsers = async () => {
       try {
-        const response = await apiCall('/admin/pending_users');
+        const response = await apiCall('/api/auth/pending_users');
         setPendingUsers(response);
       } catch (error) {
         console.error('Failed to fetch pending users:', error);
@@ -43,7 +43,7 @@ const AdminPanel: React.FC = () => {
   const handleApproveUser = async (userId: string) => {
     setIsLoading(true);
     try {
-      await apiCall('/admin/approve_user', {
+      await apiCall('/api/auth/approve_user', {
         method: 'POST',
         body: JSON.stringify({ userId, approved: true }),
       });
