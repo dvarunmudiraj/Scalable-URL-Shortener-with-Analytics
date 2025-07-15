@@ -47,7 +47,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const login = async (email: string, password: string) => {
   try {
-    const response = await apiCall('/auth/login', {
+    const response = await apiCall('/api/auth/login', {
       method: 'POST',
       body: JSON.stringify({ email, password }),
       headers: {
@@ -73,7 +73,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const signup = async (email: string, username: string, password: string) => {
   try {
-    const response = await apiCall('/auth/signup', {
+    const response = await apiCall('/api/auth/signup', {
       method: 'POST',
       body: JSON.stringify({ email, username, password }),
       headers: {
