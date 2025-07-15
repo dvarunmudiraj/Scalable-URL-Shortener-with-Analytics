@@ -157,7 +157,7 @@ const Dashboard: React.FC = () => {
 
   const deleteUrl = async (id: string) => {
     try {
-      await apiCall(`/api/url/${id}`, {
+      await apiCall(`/api/url/${Number(id)}`, {
         method: 'DELETE',
       });
       
