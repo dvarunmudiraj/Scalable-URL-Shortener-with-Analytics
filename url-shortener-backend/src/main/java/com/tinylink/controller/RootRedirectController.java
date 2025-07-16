@@ -24,9 +24,32 @@ public class RootRedirectController {
             if (url == null) {
                 return org.springframework.http.ResponseEntity.status(404).body("Short URL not found");
             }
-            String ip = request.getRemoteAddr();
+            String ip = request.getHeader("X-Forwarded-For");
+            if (ip == null || ip.isEmpty()) {
+                ip = request.getRemoteAddr();
+            }
             String userAgent = request.getHeader("User-Agent");
-            analyticsService.logClick(shortCode, ip, userAgent);
+            String referrer = request.getHeader("Referer");
+
+            // Get location from IP using public API (ip-api.com)
+            String location = null;
+            try {
+                java.net.URL geoUrl = new java.net.URL("http://ip-api.com/json/" + ip);
+                java.io.BufferedReader in = new java.io.BufferedReader(new java.io.InputStreamReader(geoUrl.openStream()));
+                StringBuilder sb = new StringBuilder();
+                String inputLine;
+                while ((inputLine = in.readLine()) != null) sb.append(inputLine);
+                in.close();
+                String json = sb.toString();
+                com.fasterxml.jackson.databind.JsonNode node = new com.fasterxml.jackson.databind.ObjectMapper().readTree(json);
+                String city = node.has("city") ? node.get("city").asText() : "";
+                String country = node.has("country") ? node.get("country").asText() : "";
+                location = city + (city.isEmpty() ? "" : ", ") + country;
+            } catch (Exception geoEx) {
+                location = null;
+            }
+
+            analyticsService.logClick(shortCode, ip, userAgent, referrer, location);
             return new RedirectView(url.getOriginalUrl());
         } catch (Exception e) {
             e.printStackTrace();

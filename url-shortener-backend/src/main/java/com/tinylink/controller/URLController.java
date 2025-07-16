@@ -17,6 +17,47 @@ import jakarta.servlet.http.HttpServletRequest;
 @RequestMapping("/api/url")
 public class URLController {
     @DeleteMapping("/{id}")
+    /**
+     * Redirect short URL and log click analytics (IP, User-Agent, Referrer, Location)
+     */
+    @GetMapping("/{shortCode}")
+    public RedirectView redirectToOriginal(@PathVariable String shortCode, HttpServletRequest request) {
+        ShortURL shortURL = urlService.getByShortCode(shortCode);
+        if (shortURL == null) {
+            return new RedirectView("/404");
+        }
+
+        String ip = request.getHeader("X-Forwarded-For");
+        if (ip == null || ip.isEmpty()) {
+            ip = request.getRemoteAddr();
+        }
+        String userAgent = request.getHeader("User-Agent");
+        String referrer = request.getHeader("Referer");
+
+        // Get location from IP using public API (ip-api.com)
+        String location = null;
+        try {
+            java.net.URL url = new java.net.URL("http://ip-api.com/json/" + ip);
+            java.io.BufferedReader in = new java.io.BufferedReader(new java.io.InputStreamReader(url.openStream()));
+            StringBuilder sb = new StringBuilder();
+            String inputLine;
+            while ((inputLine = in.readLine()) != null) sb.append(inputLine);
+            in.close();
+            String json = sb.toString();
+            // Parse city and country from JSON
+            com.fasterxml.jackson.databind.JsonNode node = new com.fasterxml.jackson.databind.ObjectMapper().readTree(json);
+            String city = node.has("city") ? node.get("city").asText() : "";
+            String country = node.has("country") ? node.get("country").asText() : "";
+            location = city + (city.isEmpty() ? "" : ", ") + country;
+        } catch (Exception e) {
+            location = null;
+        }
+
+        // Log click analytics
+        analyticsService.logClick(shortCode, ip, userAgent, referrer, location);
+
+        return new RedirectView(shortURL.getOriginalUrl());
+    }
     public ResponseEntity<?> deleteUrl(@PathVariable Long id, HttpServletRequest request) {
         String email = request.getUserPrincipal() != null ? request.getUserPrincipal().getName() : null;
         System.out.println("[DELETE URL] Requested by: " + email + ", URL id: " + id);

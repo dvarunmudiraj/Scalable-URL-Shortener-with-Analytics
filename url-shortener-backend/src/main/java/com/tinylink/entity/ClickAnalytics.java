@@ -14,11 +14,17 @@ public class ClickAnalytics {
 
     private String ip;
     private String userAgent;
+    private String referrer;
+    private String location; // e.g., city, country
 
     @ManyToOne
     private ShortURL shortUrl;
 
     // Getters and Setters
+    public String getReferrer() { return referrer; }
+    public void setReferrer(String referrer) { this.referrer = referrer; }
+    public String getLocation() { return location; }
+    public void setLocation(String location) { this.location = location; }
     public Long getId() { return id; }
 
     public LocalDateTime getClickTime() { return clickTime; }

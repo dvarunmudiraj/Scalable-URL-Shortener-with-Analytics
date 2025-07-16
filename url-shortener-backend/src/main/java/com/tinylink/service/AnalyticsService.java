@@ -25,7 +25,7 @@ public class AnalyticsService {
     private URLRepository urlRepository;
 
     // ✅ This is the method used in URLController
-    public void logClick(String shortCode, String ip, String userAgent) {
+    public void logClick(String shortCode, String ip, String userAgent, String referrer, String location) {
         ShortURL shortURL = urlRepository.findByShortCode(shortCode);
         if (shortURL == null) return;
 
@@ -34,6 +34,8 @@ public class AnalyticsService {
         click.setClickTime(LocalDateTime.now());
         click.setIp(ip);
         click.setUserAgent(userAgent);
+        click.setReferrer(referrer);
+        click.setLocation(location);
 
         analyticsRepository.save(click);
     }
