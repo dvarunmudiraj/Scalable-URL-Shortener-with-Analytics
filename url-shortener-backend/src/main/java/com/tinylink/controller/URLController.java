@@ -44,7 +44,7 @@ public class URLController {
         User user = userService.findByEmail(email);
         java.util.List<ShortURL> urls = urlService.getUrlsByUser(user);
         java.util.List<java.util.Map<String, Object>> response = new java.util.ArrayList<>();
-        String baseUrl = request.getScheme() + "://" + request.getServerName();
+        String baseUrl = "https://vurl.onrender.com";
         for (ShortURL url : urls) {
             java.util.Map<String, Object> map = new java.util.HashMap<>();
             map.put("id", url.getId());
@@ -68,7 +68,7 @@ public class URLController {
             java.util.Map<String, Object> map = new java.util.HashMap<>();
             map.put("id", url.getId());
             map.put("originalUrl", url.getOriginalUrl());
-            map.put("shortUrl", request.getScheme() + "://" + request.getServerName() + "/" + url.getShortCode());
+            map.put("shortUrl", "https://vurl.onrender.com/" + url.getShortCode());
             map.put("shortCode", url.getShortCode());
             map.put("clicks", analyticsService.getClickCount(url.getShortCode()));
             map.put("createdAt", url.getCreatedAt());
@@ -94,7 +94,7 @@ public class URLController {
             shortURL = urlService.createShortURL(req.getOriginalUrl(), user);
         }
         // Build full response object for frontend
-        String baseUrl = request.getScheme() + "://" + request.getServerName();
+        String baseUrl = "https://vurl.onrender.com";
         java.util.Map<String, Object> response = new java.util.HashMap<>();
         response.put("id", shortURL.getId());
         response.put("originalUrl", shortURL.getOriginalUrl());
