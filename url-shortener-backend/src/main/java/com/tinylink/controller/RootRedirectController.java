@@ -24,7 +24,11 @@ public class RootRedirectController {
             if (url == null) {
                 return org.springframework.http.ResponseEntity.status(404).body("Short URL not found");
             }
-            String ip = request.getHeader("X-Forwarded-For");
+            String rawXForwardedFor = request.getHeader("X-Forwarded-For");
+            String remoteAddr = request.getRemoteAddr();
+            System.out.println("[IP DEBUG] X-Forwarded-For: " + rawXForwardedFor);
+            System.out.println("[IP DEBUG] RemoteAddr: " + remoteAddr);
+            String ip = rawXForwardedFor;
             if (ip != null && !ip.isEmpty()) {
                 // X-Forwarded-For may contain multiple IPs, use the first one
                 int commaIdx = ip.indexOf(',');
@@ -34,7 +38,7 @@ public class RootRedirectController {
                     ip = ip.trim();
                 }
             } else {
-                ip = request.getRemoteAddr();
+                ip = remoteAddr;
             }
             String userAgent = request.getHeader("User-Agent");
             String referrer = request.getHeader("Referer");

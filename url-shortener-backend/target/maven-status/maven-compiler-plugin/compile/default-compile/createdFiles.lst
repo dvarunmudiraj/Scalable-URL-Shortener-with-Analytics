@@ -1,6 +1,5 @@
 com\tinylink\controller\URLController.class
 com\tinylink\security\JWTFilter.class
-com\tinylink\config\CorsConfig.class
 com\tinylink\config\RedisConfig.class
 com\tinylink\service\impl\UserServiceImpl.class
 com\tinylink\controller\AnalyticsController.class
