@@ -47,7 +47,6 @@
 | ![Analytics](assets/analytics.png) |
 
 
-> 📌 Place your screenshots in a folder called `assets/` in your root directory. Rename the images as `signup.png`, `admin-panel.png`, and `analytics.png` accordingly.
 
 ---
 
