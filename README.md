@@ -31,9 +31,21 @@
 
 ## 🖼️ Screenshots
 
-| Signup Flow | Admin Panel | Analytics |
-|-------------|-------------|-----------|
-| ![Signup](assets/signup.png) | ![Admin Panel](assets/admin-panel.png) | ![Analytics](assets/analytics.png) |
+### 🏠 Home & Signup
+| Home Page | Signup Page |
+|-----------|-------------|
+| ![Home](assets/home.png) | ![Signup](assets/signup.png) |
+
+### 🔐 Dashboard & URL View
+| User Dashboard | URL List |
+|----------------|----------|
+| ![Dashboard](assets/user-dashboard.png) | ![URL List](assets/url-list.png) |
+
+### 📊 Analytics
+| Analytics View |
+|----------------|
+| ![Analytics](assets/analytics.png) |
+
 
 > 📌 Place your screenshots in a folder called `assets/` in your root directory. Rename the images as `signup.png`, `admin-panel.png`, and `analytics.png` accordingly.
 
