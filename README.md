@@ -24,7 +24,7 @@
 
 ## 🌐 Live Demo
 
-- **Frontend**: [url-flow-analytics.vercel.app](https://url-flow-analytics.vercel.app)
+- **Frontend**: [url-flow-analytics.vercel.app](https://url-customize.vercel.app)
 - **Backend**: [vurl.onrender.com](https://vurl.onrender.com)
 
 ---
