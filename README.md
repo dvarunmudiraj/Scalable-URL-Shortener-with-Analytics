@@ -1,4 +1,4 @@
-# 🔗 Scalable URL Shortener with Analytics &nbsp; [🔗 Try Now](https://url-flow-analytics.vercel.app)
+# 🔗 Scalable URL Shortener with Analytics <a href="https://url-customize.vercel.app" target="_blank">🔗 Try Now</a>
 
 
 [![Vercel](https://img.shields.io/badge/Frontend-Vercel-000?style=for-the-badge&logo=vercel)](https://url-flow-analytics.vercel.app)
