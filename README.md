@@ -93,7 +93,7 @@ java -jar target/*.jar
 
 ### 🔸 Frontend Setup
 
-1. Go to `url-flow-analytics/`
+1. Go to `url-customize/`
 2. Set environment variable:
 
 ```env
