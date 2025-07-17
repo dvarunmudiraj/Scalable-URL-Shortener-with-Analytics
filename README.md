@@ -1,4 +1,4 @@
-# 🔗 Scalable URL Shortener with Analytics
+# 🔗 Scalable URL Shortener with Analytics &nbsp; [🌐 Live Project](https://url-customize.vercel.app)
 
 [![Vercel](https://img.shields.io/badge/Frontend-Vercel-000?style=for-the-badge&logo=vercel)](https://url-flow-analytics.vercel.app)
 [![Render](https://img.shields.io/badge/Backend-Render-5C7FFF?style=for-the-badge&logo=render)](https://vurl.onrender.com)
