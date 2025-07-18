@@ -146,7 +146,7 @@ This project is licensed under the MIT License. See `LICENSE` for details.
 
 **Varun Mudiraj**  
 B.Tech Final Year, ACE Engineering College  
-[LinkedIn](https://www.linkedin.com/in/varunmudiraj154/) | [GitHub](https://github.com/dvarunmudiraj)
+[LinkedIn](https://www.linkedin.com/in/d-varun-url/) | [GitHub](https://github.com/dvarunmudiraj)
 
 ---
 
